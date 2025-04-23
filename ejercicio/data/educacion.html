@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo Jquery Instituciones</title>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+  </head>
+  <body>
+    <h1>Instituciones Educativas</h1>
+    <div id="mensajeFinal"></div>
+    <button type="button" id="obtenerInformacion">Obtener información</button>
+    <button type="button" id="limpiarInformacion">Limpiar información</button>
+
+    <script>
+      $(document).ready(function () {
+        const url = "https://raw.githubusercontent.com/PlataformasWeb-P-AA2025/clase03-1bim-Omer21200/refs/heads/main/ejercicio/data/data_instituciones.json";
+
+        $("#obtenerInformacion").click(function () {
+          $.ajax({
+            dataType: "json",
+            url: url
+          }).then(function (data) {
+            data.forEach(function (institucion) {
+              $('#mensajeFinal').append(`
+                <p>
+                  <strong>Nombre:</strong> ${institucion["Nombre-Educativa"]}<br>
+                  <strong>AMIE:</strong> ${institucion.AMIE}<br>
+                  <strong>Provincia:</strong> ${institucion.Provincia}<br>
+                  <strong>Cantón:</strong> ${institucion.Canton}<br>
+                  <strong>Parroquia:</strong> ${institucion.Parroquia}<br>
+                  <strong>Zona Administrativa:</strong> ${institucion.ZonaAdministrativa}<br>
+                  <strong>Código Distrito:</strong> ${institucion.CodigoDistrito}<br>
+                  <strong>Sostenimiento:</strong> ${institucion.Sostenimiento}<br>
+                  <strong>Régimen Escolar:</strong> ${institucion.RegimenEscolar}<br>
+                  <strong>Modalidad:</strong> ${institucion.Modalidad}<br>
+                  <strong>Jornada:</strong> ${institucion.Jornada}<br>
+                  <strong>Nivel:</strong> ${institucion.Nivel}<br>
+                  <strong>Etnia:</strong> ${institucion.Etnia}<br>
+                  <strong>Estudiantes:</strong> ${institucion.Numeroestudiantes}<br>
+                  <strong>Docentes:</strong> ${institucion.Numerodocentes}<br>
+                  <strong>Estado:</strong> ${institucion.Estado}
+                </p><hr>
+              `);
+            });
+          });
+        });
+
+        $("#limpiarInformacion").click(function () {
+          $('#mensajeFinal').empty();
+        });
+      });
+    </script>
+  </body>
+</html>
